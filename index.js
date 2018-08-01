@@ -5,7 +5,7 @@ const APP_ID = undefined;
 exports.handler = async (event, context, callback) => {
 	//context.callbackWaitsForEmptyEventLoop = false;
 	let pool = new Pool({
-	  user: 'phortonssf',	
+	  user: 'process.env.USER',	
 	  host: 'ifindit.c9r4w6m26fqi.us-west-2.rds.amazonaws.com',
 	  database: 'dev',
 	  password: 'Kylos99sql',
