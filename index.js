@@ -2,7 +2,17 @@ const { Pool, Client } = require('pg');
 const Alexa = require('alexa-sdk');
 const APP_ID = undefined;
 
+
+
+
+
+
+
 exports.handler =  (event, context, callback) => {
+
+ // DBConfig()
+  //query()
+
 	console.log(process.env.USER)
 	//context.callbackWaitsForEmptyEventLoop = false;
 	let pool = new Pool({
@@ -26,7 +36,7 @@ exports.handler =  (event, context, callback) => {
 		  callback(null, "hit")
 	})
 
-
+//*/
 
 
                  /*
@@ -37,6 +47,7 @@ exports.handler =  (event, context, callback) => {
 
 		})().catch(e => setImmediate(() => { throw e }))
               */
+
 
 
 
