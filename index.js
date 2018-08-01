@@ -2,14 +2,15 @@ const { Pool, Client } = require('pg');
 const Alexa = require('alexa-sdk');
 const APP_ID = undefined;
 
-exports.handler = async (event, context, callback) => {
+exports.handler =  (event, context, callback) => {
+	console.log(process.env.USER)
 	//context.callbackWaitsForEmptyEventLoop = false;
 	let pool = new Pool({
-	  user: 'process.env.USER',	
-	  host: 'ifindit.c9r4w6m26fqi.us-west-2.rds.amazonaws.com',
-	  database: 'dev',
-	  password: 'Kylos99sql',
-	  port: 5432
+	  user: process.env.USER,	
+	  host: process.env.URI,
+	  database: process.env.DB,
+	  password: process.env.PW,
+	  port: process.env.PORT
 	}) 
 	
 	const query = {
