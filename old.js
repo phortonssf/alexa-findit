@@ -1,5 +1,3 @@
-
-
 'use strict';
 
 const { Pool, Client } = require('pg');
@@ -9,9 +7,7 @@ const Alexa = require('ask-sdk-core');
 // Code for the handlers here
 
 
-//exports.handler = Alexa.SkillBuilders.custom()
-const skillBuilder = Alexa.SkillBuilders.custom();
-exports.handler = skillBuilder
+exports.handler = Alexa.SkillBuilders.custom()
   .addRequestHandlers(
     LaunchRequestHandler,
     HelloWorldIntentHandler,	                           
@@ -20,8 +16,6 @@ exports.handler = skillBuilder
     SessionEndedRequestHandler
   )
   .lambda();
-
-
 
 
 const LaunchRequestHandler = {
@@ -39,9 +33,7 @@ const LaunchRequestHandler = {
 };
 
 
-
-
-const HelloWorldIntentHandler = {
+const HelloWorldIntentHandler1 = {
   canHandle(handlerInput) {	
     return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
            handlerInput.requestEnvelope.request.intent.name === 'HelloWorldIntent';
@@ -54,7 +46,6 @@ const HelloWorldIntentHandler = {
 	  .getResponse();
   }
 };
-
 
 const HelpIntentHandler = {
   canHandle(handlerInput) {
@@ -95,7 +86,9 @@ const SessionEndedRequestHandler = {
     //any cleanup logic goes here
     return handlerInput.responseBuilder.getResponse();
   }
-};   
+};
+
+
 
 
 const ErrorHandler = {
@@ -110,3 +103,63 @@ const ErrorHandler = {
            .getResponse();
   },
 };
+
+
+const HelloWorldIntentHandler = {
+  canHandle(handlerInput) {	
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
+           handlerInput.requestEnvelope.request.intent.name === 'HelloWorldIntent';
+  },
+  handle(handlerInput) {
+///*
+    let pool = new Pool({
+      user: process.env.USER,	
+      host: process.env.URI,
+      database: process.env.DB,  
+      password: process.env.PW,
+      port: process.env.PORT
+      })
+	console.log("meeeeee", pool)
+///*
+    const query = {
+      name: 'fetch-room',
+      text: 'SELECT roomname FROM rooms WHERE roomname = $1',
+      values: ['kitchen'],
+      rowmode: 'array'
+    }
+    
+    const speechText = 'okay Pedro';
+   /* try {
+	let result =  await pool.query(query)
+        console.log("res", result)
+	await pool.end()
+	if (result){
+	   	
+	  return handlerInput.responseBuilder
+		.speak(speechText)
+		.getResponse();
+	}    
+    }
+    catch(err){
+      console.log(err.stack, "error on query")
+    }
+*/ // await sleep(10000)
+
+    return handlerInput.responseBuilder
+            .speak(speechText)
+            .withSimpleCard('Hello World', speechText)
+	    .getResponse();
+/*
+    const speechText = 'okay Pedro';
+    return handlerInput.responseBuilder
+          .speak(speechText)
+          .withSimpleCard('Hello World', speechText)
+	  .getResponse();
+*/
+  }
+
+};
+
+function query(milliseconds) {
+  return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
