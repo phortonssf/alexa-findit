@@ -6,7 +6,7 @@ let foo = async function(event, context, callback) {
 	  user: 'phortonssf',
 	  host: 'ifindit.c9r4w6m26fqi.us-west-2.rds.amazonaws.com',
 	  database: 'dev',
-	  password: 'Kylos99sql',
+	  password: 'PASSWORD',
 	  port: 5432
 	})
 	client.connect()
